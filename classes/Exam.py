@@ -13,7 +13,5 @@ class Exam:
     def __init__(self, value_subject: Subject, value_examDate: date, value_year: str, value_lecturerFio: str):
         self.subject = value_subject
         self.examDate = value_examDate
-        # self.subject = value_examDate
-        # self.examDate = value_subject
         self.year = value_year
         self.lecturerFio = value_lecturerFio
