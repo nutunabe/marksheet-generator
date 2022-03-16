@@ -1,12 +1,4 @@
 import unittest
-import os
-import sys
-PROJECT_PATH = os.getcwd()
-print(PROJECT_PATH)
-SOURCE_PATH = os.path.join(
-    PROJECT_PATH, "classes"
-)
-sys.path.append(SOURCE_PATH)
 from datetime import date
 from Subject import Subject
 from Specialization import Specialization
@@ -18,8 +10,8 @@ class TestClassExam (unittest.TestCase):
         specialization = Specialization("ФИИТ")
         subject = Subject("1", "2", 3, 4, specialization)
         examDate = date(2022, 5, 5)
-        exam = Exam(Subject, examDate, 2022, "Иванов Иван Иванович")
-        self.assertEqual(Subject, exam.subject)
+        exam = Exam(subject, examDate, 2022, "Иванов Иван Иванович")
+        self.assertEqual(subject, exam.subject)
         self.assertEqual(examDate, exam.examDate)
         self.assertEqual(2022, exam.year)
         self.assertEqual("Иванов Иван Иванович", exam.lecturerFio)

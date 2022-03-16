@@ -1,12 +1,4 @@
 import unittest
-import os
-import sys
-PROJECT_PATH = os.getcwd()
-print(PROJECT_PATH)
-SOURCE_PATH = os.path.join(
-    PROJECT_PATH, "classes"
-)
-sys.path.append(SOURCE_PATH)
 from ExamPoints import ExamPoints
 from Student import Student
 
@@ -18,6 +10,7 @@ class TestClassExamPoints (unittest.TestCase):
         self.assertEqual(student, examPoints.student)
         self.assertEqual(12.3, examPoints.inPoints)
         self.assertEqual(45.6, examPoints.examPoints)
+
 
 if __name__ == '__main__':
     unittest.main()
