@@ -1,0 +1,14 @@
+#!/bin/sh
+#
+
+source venv/Scripts/activate
+output=$(python -m unittest 2>&1)
+deactivate
+
+if echo $output | grep -a "FAILED"; then
+	echo "Test is not success! Commit is rejected"
+	exit 1
+else
+	echo "Test is success! Commit is accepted"
+	exit 0
+fi
