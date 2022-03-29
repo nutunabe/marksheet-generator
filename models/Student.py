@@ -6,6 +6,6 @@ class Student:
     code: int
     fio: str
 
-    def __init__(self, value_fio: str, value_code: int):
-        self.code = value_code
-        self.fio = value_fio
+    def __init__(self, fio: str, code: int):
+        self.code = code
+        self.fio = fio

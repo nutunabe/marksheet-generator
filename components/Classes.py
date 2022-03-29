@@ -1,7 +1,7 @@
 from collections.abc import Sequence
-from Student import Student
-from Subject import Subject
-from Specialization import Specialization
+from student import Student
+from subject import Subject
+from specialization import Specialization
 
 
 class Specializations:

@@ -5,5 +5,5 @@ from dataclasses import dataclass
 class Specialization:
     name: str
 
-    def __init__(self, value_name: str):
-        self.name = value_name
+    def __init__(self, name: str):
+        self.name = name
