@@ -15,72 +15,87 @@ class TestClassSubject(unittest.TestCase):
         self.assertEqual(specialization, subject.specialization)
 
 
-# class TestAddSubject(unittest.TestCase):
-#     def test_1(self):  # CORRECT
-#         specialization = Specialization("ФИИТ")
-#         subject = Subject("Б1.Б.22", "Основы программирования",
-#                           1, 144, specialization)
-#         institute = Institute()
-#         institute.add_subject(subject)
-#         self.assertEqual(len(institute.subjects), 1)
+class TestAddSubject(unittest.TestCase):
+    def test_1(self):  # CORRECT
+        specialization = Specialization("ФИИТ")
+        subject = Subject("Б1.Б.22", "Основы программирования",
+                          1, 144, specialization)
+        institute = Institute()
+        institute.add_subject(subject)
+        self.assertEqual(len(institute.subjects), 1)
 
-#     def test_2(self):  # INCORRECT
-#         institute = Institute()
-#         institute.add_subject(None)  # subject is null
-#         self.assertEqual(len(institute.subjects), 1)
+    def test_2(self):  # INCORRECT
+        institute = Institute()
+        with self.assertRaises(Exception) as context:
+            institute.add_subject(None)  # subject is null
+        self.assertTrue('Subject must not be null' in str(context.exception))
+        # self.assertEqual(len(institute.subjects), 1)
 
-#     def test_3(self):  # INCORRECT
-#         specialization = Specialization("ФИИТ")
-#         subject = Subject("", "Основы программирования", 1,
-#                           144, specialization)  # empty subject code
-#         institute = Institute()
-#         institute.add_subject(subject)
-#         self.assertEqual(len(institute.subjects), 1)
+    def test_3(self):  # INCORRECT
+        specialization = Specialization("ФИИТ")
+        subject = Subject("", "Основы программирования", 1,
+                          144, specialization)  # empty subject code
+        institute = Institute()
+        with self.assertRaises(Exception) as context:
+            institute.add_subject(subject)
+        self.assertTrue('Empty subject code' in str(context.exception))
+        # self.assertEqual(len(institute.subjects), 1)
 
-#     def test_4(self):  # INCORRECT
-#         specialization = Specialization("ФИИТ")
-#         subject = Subject("Б1.Б.22", "", 1, 144,
-#                           specialization)  # empty subject name
-#         institute = Institute()
-#         institute.add_subject(subject)
-#         self.assertEqual(len(institute.subjects), 1)
+    def test_4(self):  # INCORRECT
+        specialization = Specialization("ФИИТ")
+        subject = Subject("Б1.Б.22", "", 1, 144,
+                          specialization)  # empty subject name
+        institute = Institute()
+        with self.assertRaises(Exception) as context:
+            institute.add_subject(subject)
+        self.assertTrue('Empty subject name' in str(context.exception))
+        # self.assertEqual(len(institute.subjects), 1)
 
-#     def test_5(self):  # INCORRECT
-#         specialization = Specialization("ФИИТ")
-#         subject = Subject("Б1.Б.22", "Основы программирования",
-#                           "1", 144, specialization)  # wrong semester type
-#         institute = Institute()
-#         institute.add_subject(subject)
-#         self.assertEqual(len(institute.subjects), 1)
+    def test_5(self):  # INCORRECT
+        specialization = Specialization("ФИИТ")
+        subject = Subject("Б1.Б.22", "Основы программирования",
+                          "1", 144, specialization)  # wrong semester type
+        institute = Institute()
+        with self.assertRaises(Exception) as context:
+            institute.add_subject(subject)
+        self.assertTrue(
+            'Wrong type: must be integer' in str(context.exception))
+        # self.assertEqual(len(institute.subjects), 1)
 
-#     def test_6(self):  # INCORRECT
-#         specialization = Specialization("ФИИТ")
-#         subject = Subject("Б1.Б.22", "Основы программирования",
-#                           1, "144", specialization)  # wrong hours type
-#         institute = Institute()
-#         institute.add_subject(subject)
-#         self.assertEqual(len(institute.subjects), 1)
+    def test_6(self):  # INCORRECT
+        specialization = Specialization("ФИИТ")
+        subject = Subject("Б1.Б.22", "Основы программирования",
+                          1, "144", specialization)  # wrong hours type
+        institute = Institute()
+        with self.assertRaises(Exception) as context:
+            institute.add_subject(subject)
+        self.assertTrue(
+            'Wrong type: must be integer' in str(context.exception))
+        # self.assertEqual(len(institute.subjects), 1)
 
-#     def test_7(self):  # CORRECT
-#         specialization1 = Specialization("ФИИТ")
-#         specialization2 = Specialization("ИВТ")
-#         subject1 = Subject(
-#             "Б1.Б.22", "Основы программирования", 1, 144, specialization1)
-#         subject2 = Subject(
-#             "Б1.Б.22", "Основы программирования", 1, 144, specialization2)
-#         institute = Institute()
-#         institute.add_subject(subject1)
-#         institute.add_subject(subject2)
-#         self.assertEqual(len(institute.subjects), 2)
+    def test_7(self):  # CORRECT
+        specialization1 = Specialization("ФИИТ")
+        specialization2 = Specialization("ИВТ")
+        subject1 = Subject(
+            "Б1.Б.22", "Основы программирования", 1, 144, specialization1)
+        subject2 = Subject(
+            "Б1.Б.22", "Основы программирования", 1, 144, specialization2)
+        institute = Institute()
+        institute.add_subject(subject1)
+        institute.add_subject(subject2)
+        self.assertEqual(len(institute.subjects), 2)
 
-#     def test_8(self):  # INCORRECT
-#         specialization = Specialization("ФИИТ")
-#         subject = Subject("Б1.Б.22", "Основы программирования",
-#                           1, 144, specialization)
-#         institute = Institute()
-#         institute.add_subject(subject)
-#         institute.add_subject(subject)  # re-entry
-#         self.assertEqual(len(institute.subjects), 2)
+    def test_8(self):  # INCORRECT
+        specialization = Specialization("ФИИТ")
+        subject = Subject("Б1.Б.22", "Основы программирования",
+                          1, 144, specialization)
+        institute = Institute()
+        with self.assertRaises(Exception) as context:
+            institute.add_subject(subject)
+            institute.add_subject(subject)  # re-entry
+        self.assertTrue(
+            'This element already exists' in str(context.exception))
+        # self.assertEqual(len(institute.subjects), 2)
 
 
 if __name__ == '__main__':

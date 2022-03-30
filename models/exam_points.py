@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from student import Student
 
+
 @dataclass
 class ExamPoints:
     student: Student
