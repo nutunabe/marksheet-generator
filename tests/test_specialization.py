@@ -22,7 +22,7 @@ class TestAddSpecialization(unittest.TestCase):
             institute.add_specialization(None)  # specialization is null
         self.assertTrue(
             'Specialization must not be null' in str(context.exception))
-        # self.assertEqual(len(institute.specializations), 1)
+        self.assertEqual(len(institute.specializations), 0)
 
     def test_3(self):  # INCORRECT
         institute = Institute()
@@ -30,7 +30,7 @@ class TestAddSpecialization(unittest.TestCase):
             institute.add_specialization(1)  # wrong type
         self.assertTrue(
             'Wrong type: must be Specialization' in str(context.exception))
-        # self.assertEqual(len(institute.specializations), 1)
+        self.assertEqual(len(institute.specializations), 0)
 
     def test_4(self):  # INCORRECT
         specialization = Specialization("")  # empty specialization name
@@ -38,7 +38,7 @@ class TestAddSpecialization(unittest.TestCase):
         with self.assertRaises(Exception) as context:
             institute.add_specialization(specialization)
         self.assertTrue('Empty name' in str(context.exception))
-        # self.assertEqual(len(institute.specializations), 1)
+        self.assertEqual(len(institute.specializations), 0)
 
     def test_5(self):  # CORRECT
         specialization1 = Specialization("ФИИТ")
@@ -57,7 +57,7 @@ class TestAddSpecialization(unittest.TestCase):
             institute.add_specialization(specialization2)
         self.assertTrue(
             'This element already exists' in str(context.exception))
-        # self.assertEqual(len(institute.specializations), 2)
+        self.assertEqual(len(institute.specializations), 1)
 
 
 if __name__ == '__main__':

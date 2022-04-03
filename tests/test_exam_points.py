@@ -27,7 +27,7 @@ class TestAddExamPoints(unittest.TestCase):
             institute.add_exam_result(None)  # exam points is null
         self.assertTrue(
             'Exam points must not be null' in str(context.exception))
-        # self.assertEqual(len(institute.exam_results), 1)
+        self.assertEqual(len(institute.exam_results), 0)
 
     def test_3(self):  # CORRECT
         student1 = Student("Федоров Байытаан Павлович", 123456)
@@ -48,7 +48,7 @@ class TestAddExamPoints(unittest.TestCase):
             institute.add_exam_result(examPoints)  # re-entry
         self.assertTrue(
             'This element already exists' in str(context.exception))
-        # self.assertEqual(len(institute.exam_results), 2)
+        self.assertEqual(len(institute.exam_results), 1)
 
     def test_5(self):  # INCORRECT
         student = Student("Федоров Байытаан Павлович", 123456)
@@ -58,7 +58,7 @@ class TestAddExamPoints(unittest.TestCase):
             institute.add_exam_result(examPoints)
         self.assertTrue(
             'Wrong type: must be Student' in str(context.exception))
-        # self.assertEqual(len(institute.exam_results), 1)
+        self.assertEqual(len(institute.exam_results), 0)
 
     def test_6(self):  # INCORRECT
         student = Student("Федоров Байытаан Павлович", 123456)
@@ -67,7 +67,7 @@ class TestAddExamPoints(unittest.TestCase):
         with self.assertRaises(Exception) as context:
             institute.add_exam_result(examPoints)
         self.assertTrue('Wrong type: must be float' in str(context.exception))
-        # self.assertEqual(len(institute.exam_results), 1)
+        self.assertEqual(len(institute.exam_results), 0)
 
     def test_7(self):  # INCORRECT
         student = Student("Федоров Байытаан Павлович", 123456)
@@ -76,7 +76,7 @@ class TestAddExamPoints(unittest.TestCase):
         with self.assertRaises(Exception) as context:
             institute.add_exam_result(examPoints)
         self.assertTrue('Wrong type: must be float' in str(context.exception))
-        # self.assertEqual(len(institute.exam_results), 1)
+        self.assertEqual(len(institute.exam_results), 0)
 
     def test_8(self):  # INCORRECT
         student = Student("Федоров Байытаан Павлович", 123456)  # inpoints > 70
@@ -86,7 +86,7 @@ class TestAddExamPoints(unittest.TestCase):
             institute.add_exam_result(examPoints)
         self.assertTrue(
             'In points must be lower than 70' in str(context.exception))
-        # self.assertEqual(len(institute.exam_results), 1)
+        self.assertEqual(len(institute.exam_results), 0)
 
     def test_9(self):  # INCORRECT
         student = Student("Федоров Байытаан Павлович", 123456)
@@ -96,7 +96,7 @@ class TestAddExamPoints(unittest.TestCase):
             institute.add_exam_result(examPoints)
         self.assertTrue(
             'Exam points must be lower than 30' in str(context.exception))
-        # self.assertEqual(len(institute.exam_results), 1)
+        self.assertEqual(len(institute.exam_results), 0)
 
 
 if __name__ == '__main__':

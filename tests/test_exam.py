@@ -34,7 +34,7 @@ class TestAddExam(unittest.TestCase):
         with self.assertRaises(Exception) as context:
             institute.add_exam(None)  # exam is null
         self.assertTrue('Exam must not be null' in str(context.exception))
-        # self.assertEqual(len(institute.exams), 1)
+        self.assertEqual(len(institute.exams), 0)
 
     def test_3(self):  # CORRECT
         specialization1 = Specialization("ФИИТ")
@@ -63,7 +63,7 @@ class TestAddExam(unittest.TestCase):
             institute.add_exam(exam)  # re-entry
         self.assertTrue(
             'This element already exists' in str(context.exception))
-        # self.assertEqual(len(institute.exams), 2)
+        self.assertEqual(len(institute.exams), 1)
 
 
 if __name__ == '__main__':

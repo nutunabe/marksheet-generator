@@ -26,7 +26,7 @@ class TestAddGroup(unittest.TestCase):
         with self.assertRaises(Exception) as context:
             institute.add_group(None)  # group is null
         self.assertTrue('Group must not be null' in str(context.exception))
-        # self.assertEqual(len(institute.groups), 1)
+        self.assertEqual(len(institute.groups), 0)
 
     def test_3(self):  # INCORRECT
         specialization = Specialization("ФИИТ")
@@ -35,7 +35,7 @@ class TestAddGroup(unittest.TestCase):
         with self.assertRaises(Exception) as context:
             institute.add_group(group)
         self.assertTrue('Empty name' in str(context.exception))
-        # self.assertEqual(len(institute.groups), 1)
+        self.assertEqual(len(institute.groups), 0)
 
     def test_4(self):  # CORRECT
         specialization1 = Specialization("ФИИТ")
@@ -56,7 +56,7 @@ class TestAddGroup(unittest.TestCase):
             institute.add_group(group)  # re-entry
         self.assertTrue(
             'This element already exists' in str(context.exception))
-        # self.assertEqual(len(institute.groups), 2)
+        self.assertEqual(len(institute.groups), 1)
 
 
 if __name__ == '__main__':

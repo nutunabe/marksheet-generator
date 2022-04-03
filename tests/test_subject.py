@@ -29,7 +29,7 @@ class TestAddSubject(unittest.TestCase):
         with self.assertRaises(Exception) as context:
             institute.add_subject(None)  # subject is null
         self.assertTrue('Subject must not be null' in str(context.exception))
-        # self.assertEqual(len(institute.subjects), 1)
+        self.assertEqual(len(institute.subjects), 0)
 
     def test_3(self):  # INCORRECT
         specialization = Specialization("ФИИТ")
@@ -39,7 +39,7 @@ class TestAddSubject(unittest.TestCase):
         with self.assertRaises(Exception) as context:
             institute.add_subject(subject)
         self.assertTrue('Empty subject code' in str(context.exception))
-        # self.assertEqual(len(institute.subjects), 1)
+        self.assertEqual(len(institute.subjects), 0)
 
     def test_4(self):  # INCORRECT
         specialization = Specialization("ФИИТ")
@@ -49,7 +49,7 @@ class TestAddSubject(unittest.TestCase):
         with self.assertRaises(Exception) as context:
             institute.add_subject(subject)
         self.assertTrue('Empty subject name' in str(context.exception))
-        # self.assertEqual(len(institute.subjects), 1)
+        self.assertEqual(len(institute.subjects), 0)
 
     def test_5(self):  # INCORRECT
         specialization = Specialization("ФИИТ")
@@ -60,7 +60,7 @@ class TestAddSubject(unittest.TestCase):
             institute.add_subject(subject)
         self.assertTrue(
             'Wrong type: must be integer' in str(context.exception))
-        # self.assertEqual(len(institute.subjects), 1)
+        self.assertEqual(len(institute.subjects), 0)
 
     def test_6(self):  # INCORRECT
         specialization = Specialization("ФИИТ")
@@ -71,7 +71,7 @@ class TestAddSubject(unittest.TestCase):
             institute.add_subject(subject)
         self.assertTrue(
             'Wrong type: must be integer' in str(context.exception))
-        # self.assertEqual(len(institute.subjects), 1)
+        self.assertEqual(len(institute.subjects), 0)
 
     def test_7(self):  # CORRECT
         specialization1 = Specialization("ФИИТ")
@@ -95,7 +95,7 @@ class TestAddSubject(unittest.TestCase):
             institute.add_subject(subject)  # re-entry
         self.assertTrue(
             'This element already exists' in str(context.exception))
-        # self.assertEqual(len(institute.subjects), 2)
+        self.assertEqual(len(institute.subjects), 1)
 
 
 if __name__ == '__main__':
