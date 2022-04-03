@@ -85,7 +85,7 @@ class TestGetStudent(unittest.TestCase):
     def test_1(self):  # CORRECT
         institute = Institute()
         student = institute.get_student(123456)
-        self.assertIn(type(student), [Student, None])
+        self.assertIn(type(student), [Student, type(None)])
 
     def test_2(self):  # INCORRECT
         institute = Institute()
@@ -120,12 +120,12 @@ class TestGetStudent(unittest.TestCase):
     def test_8(self):  # CORRECT
         institute = Institute()
         student = institute.get_student(100000)
-        self.assertIn(type(student), [Student, None])
+        self.assertIn(type(student), [Student, type(None)])
 
     def test_9(self):  # CORRECT
         institute = Institute()
         student = institute.get_student(999999)
-        self.assertIn(type(student), [Student, None])
+        self.assertIn(type(student), [Student, type(None)])
 
     def test_10(self):  # INCORRECT
         institute = Institute()
