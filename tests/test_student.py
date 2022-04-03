@@ -81,5 +81,62 @@ class TestAddStudent(unittest.TestCase):
         # self.assertEqual(len(institute.students), 1)
 
 
+class TestGetStudent(unittest.TestCase):
+    def test_1(self):  # CORRECT
+        institute = Institute()
+        student = institute.get_student(123456)
+        self.assertIn(type(student), [Student, None])
+
+    def test_2(self):  # INCORRECT
+        institute = Institute()
+        with self.assertRaises(Exception) as context:
+            student = institute.get_student(None)  # code is null
+
+    def test_3(self):  # INCORRECT
+        institute = Institute()
+        with self.assertRaises(Exception) as context:
+            istudent = nstitute.get_student(123456.0)  # code is float
+
+    def test_4(self):  # INCORRECT
+        institute = Institute()
+        with self.assertRaises(Exception) as context:
+            student = institute.get_student(-123456)  # code < 0
+
+    def test_5(self):  # INCORRECT
+        institute = Institute()
+        with self.assertRaises(Exception) as context:
+            student = institute.get_student("123456")  # code is not int
+
+    def test_6(self):  # INCORRECT
+        institute = Institute()
+        with self.assertRaises(Exception) as context:
+            student = institute.get_student(1234567)  # code is not 6-digit
+
+    def test_7(self):  # INCORRECT
+        institute = Institute()
+        with self.assertRaises(Exception) as context:
+            student = institute.get_student(12345)  # code is not 6-digit
+
+    def test_8(self):  # CORRECT
+        institute = Institute()
+        student = institute.get_student(100000)
+        self.assertIn(type(student), [Student, None])
+
+    def test_9(self):  # CORRECT
+        institute = Institute()
+        student = institute.get_student(999999)
+        self.assertIn(type(student), [Student, None])
+
+    def test_10(self):  # INCORRECT
+        institute = Institute()
+        with self.assertRaises(Exception) as context:
+            student = institute.get_student(1000000)
+
+    def test_11(self):  # INCORRECT
+        institute = Institute()
+        with self.assertRaises(Exception) as context:
+            student = institute.get_student(99999)
+
+
 if __name__ == '__main__':
     unittest.main()
