@@ -1,7 +1,11 @@
 import unittest
+from specialization import Specialization
 from exam_points import ExamPoints
+from exam import Exam
 from student import Student
+from subject import Subject
 from institute import Institute
+from datetime import date
 
 
 class TestClassExamPoints(unittest.TestCase):
@@ -109,6 +113,8 @@ class TestGetExamResults(unittest.TestCase):
         institute = Institute()
         examResults = institute.get_exam_results(exam)
         self.assertIn(type(examResults), [list, type(None)])
+        if examResults != None and len(examResults) != 0:
+            self.assertEquals(type(examResults[0]), ExamPoints)
 
     def test_2(self):
         exam = "abcd"

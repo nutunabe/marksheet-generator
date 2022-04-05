@@ -25,14 +25,6 @@ class TestAddStudent(unittest.TestCase):
         self.assertEqual(len(institute.students), 0)
 
     def test_3(self):  # INCORRECT
-        student = Student("", 123456)  # empty student name
-        institute = Institute()
-        with self.assertRaises(Exception) as context:
-            institute.add_student(student)
-        self.assertTrue('Empty name' in str(context.exception))
-        self.assertEqual(len(institute.students), 0)
-
-    def test_4(self):  # INCORRECT
         student = Student("ФедоровБайытаанПавлович",
                           123456)  # incorrect student name
         institute = Institute()
@@ -41,7 +33,31 @@ class TestAddStudent(unittest.TestCase):
         self.assertTrue('Incorrect name' in str(context.exception))
         self.assertEqual(len(institute.students), 0)
 
-    def test_5(self):  # CORRECT
+    def test_4(self):  # INCORRECT
+        student = Student("", 123456)  # empty student name
+        institute = Institute()
+        with self.assertRaises(Exception) as context:
+            institute.add_student(student)
+        self.assertTrue('Empty name' in str(context.exception))
+        self.assertEqual(len(institute.students), 0)
+
+    def test_5(self):  # INCORRECT
+        student = Student(1234, 123456)  # wrong student name type
+        institute = Institute()
+        with self.assertRaises(Exception) as context:
+            institute.add_student(student)
+        self.assertTrue('Wrong type: must be str' in str(context.exception))
+        self.assertEqual(len(institute.students), 0)
+
+    def test_6(self):  # INCORRECT
+        student = Student(None, 123456)  # empty student name
+        institute = Institute()
+        with self.assertRaises(Exception) as context:
+            institute.add_student(student)
+        self.assertTrue('Student name must not be null' in str(context.exception))
+        self.assertEqual(len(institute.students), 0)
+
+    def test_7(self):  # CORRECT
         student1 = Student("Федоров Байытаан Павлович", 123456)
         student2 = Student("Иванов Иван Иванович", 456789)
         institute = Institute()
@@ -49,7 +65,7 @@ class TestAddStudent(unittest.TestCase):
         institute.add_student(student2)
         self.assertEqual(len(institute.students), 2)
 
-    def test_6(self):  # INCORRECT
+    def test_8(self):  # INCORRECT
         student1 = Student("Федоров Байытаан Павлович", 123456)
         student2 = Student("Федоров Байытаан Павлович", 123456)  # re-entry
         institute = Institute()
@@ -60,7 +76,37 @@ class TestAddStudent(unittest.TestCase):
             'This element already exists' in str(context.exception))
         self.assertEqual(len(institute.students), 1)
 
-    def test_7(self):  # INCORRECT
+    def test_9(self):  # INCORRECT
+        # wrong student code type
+        student = Student("Федоров Байытаан Павлович", None)
+        institute = Institute()
+        with self.assertRaises(Exception) as context:
+            institute.add_student(student)
+        self.assertTrue(
+            'Student code must not be null' in str(context.exception))
+        self.assertEqual(len(institute.students), 0)
+
+    def test_10(self):  # INCORRECT
+        # wrong student code type
+        student = Student("Федоров Байытаан Павлович", 123456.0)
+        institute = Institute()
+        with self.assertRaises(Exception) as context:
+            institute.add_student(student)
+        self.assertTrue(
+            'Wrong type: must be integer' in str(context.exception))
+        self.assertEqual(len(institute.students), 0)
+
+    def test_11(self):  # INCORRECT
+        # wrong student code type
+        student = Student("Федоров Байытаан Павлович", -123456)
+        institute = Institute()
+        with self.assertRaises(Exception) as context:
+            institute.add_student(student)
+        self.assertTrue(
+            'Student code must not be > 0' in str(context.exception))
+        self.assertEqual(len(institute.students), 0)
+
+    def test_12(self):  # INCORRECT
         # wrong student code type
         student = Student("Федоров Байытаан Павлович", "123456")
         institute = Institute()
@@ -70,9 +116,19 @@ class TestAddStudent(unittest.TestCase):
             'Wrong type: must be integer' in str(context.exception))
         self.assertEqual(len(institute.students), 0)
 
-    def test_8(self):  # INCORRECT
+    def test_13(self):  # INCORRECT
         # student code is not 6-digit
-        student = Student("Федоров Байытаан Павлович", 1)
+        student = Student("Федоров Байытаан Павлович", 99999)
+        institute = Institute()
+        with self.assertRaises(Exception) as context:
+            institute.add_student(student)
+        self.assertTrue(
+            'Student code is not 6-digit' in str(context.exception))
+        self.assertEqual(len(institute.students), 0)
+
+    def test_14(self):  # INCORRECT
+        # student code is not 6-digit
+        student = Student("Федоров Байытаан Павлович", 1000000)
         institute = Institute()
         with self.assertRaises(Exception) as context:
             institute.add_student(student)
