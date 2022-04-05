@@ -98,5 +98,27 @@ class TestAddSubject(unittest.TestCase):
         self.assertEqual(len(institute.subjects), 1)
 
 
+class TestGetSubject(unittest.TestCase):
+    def test_1(self):  # CORRECT
+        institute = Institute()
+        subject = institute.get_subject("Основы программирования")
+        self.assertIn(type(subject), [Subject, type(None)])
+
+    def test_2(self):  # INCORRECT
+        institute = Institute()
+        with self.assertRaises(Exception) as context:
+            subject = institute.get_subject("")
+
+    def test_3(self):  # INCORRECT
+        institute = Institute()
+        with self.assertRaises(Exception) as context:
+            subject = institute.get_subject(1234)
+
+    def test_4(self):  # INCORRECT
+        institute = Institute()
+        with self.assertRaises(Exception) as context:
+            subject = institute.get_subject(None)
+
+
 if __name__ == '__main__':
     unittest.main()

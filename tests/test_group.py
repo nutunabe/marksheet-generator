@@ -59,5 +59,32 @@ class TestAddGroup(unittest.TestCase):
         self.assertEqual(len(institute.groups), 1)
 
 
+class TestGetGroup(unittest.TestCase):
+    def test_1(self):  # CORRECT
+        institute = Institute()
+        group = institute.get_group("М-ФИИТ-21")
+        self.assertIn(type(group), [Group, type(None)])
+
+    def test_2(self):  # INCORRECT
+        institute = Institute()
+        with self.assertRaises(Exception) as context:
+            institute.get_group("")
+
+    def test_3(self):  # INCORRECT
+        institute = Institute()
+        with self.assertRaises(Exception) as context:
+            institute.get_group(1234)
+
+    def test_4(self):  # INCORRECT
+        institute = Institute()
+        with self.assertRaises(Exception) as context:
+            institute.get_group(None)
+
+    # def test_5(self):  # INCORRECT
+    #     institute = Institute()
+    #     with self.assertRaises(Exception) as context:
+    #         institute.get_group("abcd")  # does not match the mask
+
+
 if __name__ == '__main__':
     unittest.main()

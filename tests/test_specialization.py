@@ -60,5 +60,27 @@ class TestAddSpecialization(unittest.TestCase):
         self.assertEqual(len(institute.specializations), 1)
 
 
+class TestGetSpecialization(unittest.TestCase):
+    def test_1(self):  # CORRECT
+        institute = Institute()
+        spec = institute.get_specialization("ФИИТ")
+        self.assertIn(type(spec), [Specialization, type(None)])
+
+    def test_2(self):  # INCORRECT
+        institute = Institute()
+        with self.assertRaises(Exception) as context:
+            institute.get_specialization("")
+
+    def test_3(self):  # INCORRECT
+        institute = Institute()
+        with self.assertRaises(Exception) as context:
+            institute.get_specialization(1234)
+
+    def test_4(self):  # INCORRECT
+        institute = Institute()
+        with self.assertRaises(Exception) as context:
+            institute.get_specialization(None)
+
+
 if __name__ == '__main__':
     unittest.main()

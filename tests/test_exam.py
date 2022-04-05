@@ -66,5 +66,92 @@ class TestAddExam(unittest.TestCase):
         self.assertEqual(len(institute.exams), 1)
 
 
+class TestGetExam(unittest.TestCase):
+    def test_1(self):  # CORRECT
+        institute = Institute()
+        group_name = "ФИИТ"
+        subj_name = "Основы программирования"
+        exam = institute.get_exam(group_name, subj_name, date(2022, 3, 25))
+        self.assertIn(type(exam), [Exam, type(None)])
+
+    def test_2(self):  # INCORRECT
+        institute = Institute()
+        subj_name = "Основы программирования"
+        with self.assertRaises(Exception) as context:
+            exam = institute.get_exam("", subj_name, date(2022, 3, 25))
+
+    def test_3(self):  # INCORRECT
+        institute = Institute()
+        subj_name = "Основы программирования"
+        with self.assertRaises(Exception) as context:
+            exam = institute.get_exam(1234, subj_name, date(2022, 3, 25))
+
+    def test_4(self):  # INCORRECT
+        institute = Institute()
+        subj_name = "Основы программирования"
+        with self.assertRaises(Exception) as context:
+            exam = institute.get_exam(None, subj_name, date(2022, 3, 25))
+
+    def test_5(self):  # INCORRECT
+        institute = Institute()
+        group_name = "ФИИТ"
+        with self.assertRaises(Exception) as context:
+            exam = institute.get_exam(group_name, "", date(2022, 3, 25))
+
+    def test_6(self):  # INCORRECT
+        institute = Institute()
+        group_name = "ФИИТ"
+        with self.assertRaises(Exception) as context:
+            exam = institute.get_exam(group_name, 1234, date(2022, 3, 25))
+
+    def test_7(self):  # INCORRECT
+        institute = Institute()
+        group_name = "ФИИТ"
+        with self.assertRaises(Exception) as context:
+            exam = institute.get_exam(group_name, None, date(2022, 3, 25))
+
+    def test_8(self):  # INCORRECT
+        institute = Institute()
+        group_name = "ФИИТ"
+        subj_name = "Основы программирования"
+        with self.assertRaises(Exception) as context:
+            exam = institute.get_exam(group_name, subj_name, "2022, 3, 25")
+
+    def test_9(self):  # INCORRECT
+        institute = Institute()
+        group_name = "ФИИТ"
+        subj_name = "Основы программирования"
+        with self.assertRaises(Exception) as context:
+            exam = institute.get_exam(group_name, subj_name, "2022/03/25")
+
+    def test_10(self):  # INCORRECT
+        institute = Institute()
+        group_name = "ФИИТ"
+        subj_name = "Основы программирования"
+        with self.assertRaises(Exception) as context:
+            exam = institute.get_exam(group_name, subj_name, 2022)
+
+    def test_11(self):  # INCORRECT
+        institute = Institute()
+        group_name = "ФИИТ"
+        subj_name = "Основы программирования"
+        with self.assertRaises(Exception) as context:
+            exam = institute.get_exam(group_name, subj_name, None)
+
+    def test_12(self):  # INCORRECT
+        institute = Institute()
+        group_name = "ФИИТ"
+        subj_name = "Основы программирования"
+        with self.assertRaises(Exception) as context:
+            exam = institute.get_exam(group_name, subj_name, date(2024, 3, 25))
+
+    def test_13(self):  # INCORRECT
+        institute = Institute()
+        group_name = "ФИИТ"
+        subj_name = "Основы программирования"
+        with self.assertRaises(Exception) as context:
+            exam = institute.get_exam(group_name, subj_name, date(1024, 3, 25))
+
+
 if __name__ == '__main__':
     unittest.main()

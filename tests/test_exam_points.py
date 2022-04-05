@@ -13,7 +13,7 @@ class TestClassExamPoints(unittest.TestCase):
         self.assertEqual(12.3, examPoints.examPoints)
 
 
-class TestAddExamPoints(unittest.TestCase):
+class TestAddExamResult(unittest.TestCase):
     def test_1(self):  # CORRECT
         student = Student("Федоров Байытаан Павлович", 123456)
         examPoints = ExamPoints(student, 65.4, 12.3)
@@ -97,6 +97,30 @@ class TestAddExamPoints(unittest.TestCase):
         self.assertTrue(
             'Exam points must be lower than 30' in str(context.exception))
         self.assertEqual(len(institute.exam_results), 0)
+
+
+class TestGetExamResults(unittest.TestCase):
+    def test_1(self):
+        specialization = Specialization("ФИИТ")
+        subject = Subject("Б1.Б.22", "Основы программирования",
+                          1, 144, specialization)
+        examDate = date(2022, 5, 5)
+        exam = Exam(subject, examDate, 2022, "Иванов Иван Иванович")
+        institute = Institute()
+        examResults = institute.get_exam_results(exam)
+        self.assertIn(type(examResults), [list, type(None)])
+
+    def test_2(self):
+        exam = "abcd"
+        institute = Institute()
+        with self.assertRaises(Exception) as context:
+            institute.get_exam_results(exam)
+
+    def test_3(self):
+        exam = None
+        institute = Institute()
+        with self.assertRaises(Exception) as context:
+            institute.get_exam_results(exam)
 
 
 if __name__ == '__main__':
