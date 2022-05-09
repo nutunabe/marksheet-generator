@@ -170,6 +170,12 @@ class Institute:
 
     def get_exam(self, group: str, subject: str, date: Date):
         exam = None
+        if group == "" or subject == "" or date == "":
+            raise Exception()
+        if type(group) != str or type(subject) != str or type(date) != Date:
+            raise Exception()
+        if date > Date(2022, 5, 31) or date < Date(1934, 1, 1):
+            raise Exception()
         for x in self.exams:
             if x.examDate == date and x.subject.name == subject:
                 exam = x
@@ -177,6 +183,8 @@ class Institute:
 
     def get_exam_results(self, exam: Exam):
         exam_results = None
+        if type(exam) != Exam:
+            raise Exception()
         for x in self.exam_results:
             if x.exam.group.name == exam.group.name:
                 exam_results = x
