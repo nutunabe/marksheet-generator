@@ -27,6 +27,18 @@ class Institute:
     def add_student(self, student: Student):
         if student == None:
             raise Exception("Student must not be null")
+        if student.code == None:
+            raise Exception("Student code must not be null")
+        if type(student.code) != int:
+            raise Exception("Wrong type: must be integer")
+        if student.code < 0:
+            raise Exception("Student code must not be < 0")
+        if len(str(student.code)) != 6:
+            raise Exception("Student code is not 6-digit")
+        if student.fio == None:
+            raise Exception("Student name must not be null")
+        if type(student.fio) != str:
+            raise Exception("Wrong type: must be str")
         if student.fio == "":
             raise Exception("Empty name")
         if " " in student.fio:
@@ -39,10 +51,6 @@ class Institute:
         for x in self.students:
             if x == student:
                 raise Exception("This element already exists")
-        if type(student.code) != int:
-            raise Exception("Wrong type: must be integer")
-        if student.code / 100000 < 1:
-            raise Exception("Student code is not 6-digit")
         self.students.append(student)
 
     def add_group(self, group: Group):
@@ -53,6 +61,7 @@ class Institute:
         for x in self.groups:
             if x == group:
                 raise Exception("This element already exists")
+        exception = ""
         self.groups.append(group)
 
     def add_subject(self, subject: Subject):
@@ -105,20 +114,70 @@ class Institute:
                 raise Exception("This element already exists")
         self.exam_results.append(exam_result)
 
-    # def get_student(self, code: int):
-    #     #  . . .
+    def get_student(self, code: int) -> Student:
+        student = None
+        if code == None:
+            raise Exception()
+        if type(code) != int:
+            raise Exception()
+        if code < 0:
+            raise Exception()
+        if len(str(code)) != 6:
+            raise Exception()
+        for x in self.students:
+            if x.code == code:
+                student = x
+        return student
 
-    # def get_group(self, name: str):
-    #     #  . . .
+    def get_group(self, name: str) -> Group:
+        group = None
+        if name == None:
+            raise Exception()
+        if type(name) != str:
+            raise Exception()
+        if name == "":
+            raise Exception()
+        for x in self.groups:
+            if x.name == name:
+                group = x
+        return group
 
-    # def get_subject(self, name: str):
-    #     #  . . .
+    def get_subject(self, name: str):
+        subject = None
+        if name == None:
+            raise Exception()
+        if type(name) != str:
+            raise Exception()
+        if name == "":
+            raise Exception()
+        for x in self.subjects:
+            if x.name == name:
+                subject = x
+        return subject
 
-    # def get_specialization(self, name: str):
-    #     #  . . .
+    def get_specialization(self, name: str):
+        specialization = None
+        if name == None:
+            raise Exception()
+        if type(name) != str:
+            raise Exception()
+        if name == "":
+            raise Exception()
+        for x in self.specializations:
+            if x.name == name:
+                specialization = x
+        return specialization
 
-    # def get_exam(self, group: str, subject: str, date: Date):
-    #     #  . . .
+    def get_exam(self, group: str, subject: str, date: Date):
+        exam = None
+        for x in self.exams:
+            if x.examDate == date and x.subject.name == subject:
+                exam = x
+        return exam
 
-    # def get_exam_results(self, exam: Exam):
-    #     #  . . .
+    def get_exam_results(self, exam: Exam):
+        exam_results = None
+        for x in self.exam_results:
+            if x.exam.group.name == exam.group.name:
+                exam_results = x
+        return exam_results
