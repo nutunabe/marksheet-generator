@@ -6,4 +6,6 @@ from exam import Exam
 from exam_points import ExamPoints
 
 def get(arg, institute):
-    print('ъеъ')
+    if arg == 'student':
+        code = int(input("Номер студенческого билета: "))
+        print(institute.get_student(code))
