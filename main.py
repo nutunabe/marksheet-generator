@@ -30,7 +30,7 @@ def main(*args):
     institute = Institute()
     def clear(): return os.system('cls')
     if len(args[0]) == 1:
-        print("ERROR:\texample - main.py 1 2\ntry:\tmain.py -h")
+        print("ERROR:\texample - main.py add student\ntry:\tmain.py -h")
         quit()
     if len(args[0]) == 2:
         if args[0][1] == '-v' or args[0][1] == '--version':
